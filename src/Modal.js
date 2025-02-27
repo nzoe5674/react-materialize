@@ -3,7 +3,8 @@ import React, {
   Children,
   cloneElement,
   useRef,
-  useEffect
+  useEffect,
+  useMemo
 } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
