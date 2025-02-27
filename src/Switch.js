@@ -1,50 +1,49 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import idgen from './idgen';
 
 const Switch = ({
-  id = `Switch-${idgen()}`,
+  id,
   offLabel,
   onLabel,
   onChange = () => {},
+  checked,
   ...props
-}) => (
-  <div className="switch">
-    <label htmlFor={id}>
-      {offLabel}
-      <input id={id} type="checkbox" {...props} />
-      <span className="lever" />
-      {onLabel}
-    </label>
-  </div>
-);
+}) => {
+  const finalIdRef = useRef(id || `Switch-${idgen()}`);
+  const finalId = finalIdRef.current;
+
+  const handleChange = e => {
+    if (onChange) {
+      onChange(e.target.checked);
+    }
+  };
+
+  return (
+    <div className="switch">
+      <label htmlFor={finalId}>
+        {offLabel}
+        <input
+          id={finalId}
+          type="checkbox"
+          checked={checked}
+          onChange={handleChange}
+          {...props}
+        />
+        <span className="lever" />
+        {onLabel}
+      </label>
+    </div>
+  );
+};
 
 Switch.propTypes = {
-  /**
-   * override id
-   * @default idgen()
-   */
   id: PropTypes.string,
   className: PropTypes.string,
-  /**
-   * label for off
-   */
   offLabel: PropTypes.string.isRequired,
-  /**
-   * label for on
-   */
   onLabel: PropTypes.string.isRequired,
-  /**
-   * onChange callback
-   */
   onChange: PropTypes.func,
-  /**
-   * disabled input
-   */
   disabled: PropTypes.bool,
-  /**
-   * initialise checkbox checked
-   */
   checked: PropTypes.bool
 };
 

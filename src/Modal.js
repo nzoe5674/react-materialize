@@ -44,12 +44,8 @@ const Modal = ({
   id,
   ...props
 }) => {
-  // Compute the id only once; if id isn't provided, auto-generate one.
   const finalIdRef = useRef(id || `Modal-${idgen()}`);
   const finalId = finalIdRef.current;
-  //const finalId = useMemo(() => id || `Modal-${idgen()}`, [id]);
-  console.log('react-materialize modal id: ' + id);
-  console.log('react-materialize modal finalID: ' + finalId);
 
   const _modalRoot = useRef(null);
   const _modalInstance = useRef(null);
