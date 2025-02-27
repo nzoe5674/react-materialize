@@ -14,6 +14,10 @@ const Switch = ({
   const finalId = finalIdRef.current;
 
   const handleChange = e => {
+    // Uncomment the next line if you need to stop event propagation:
+    // e.stopPropagation();
+
+    // Pass the new checked state to the onChange handler
     if (onChange) {
       onChange(e.target.checked);
     }
