@@ -40,9 +40,13 @@ const Modal = ({
   },
   open = false,
   root = typeof window !== 'undefined' ? document.body : null,
-  id = `Modal-${idgen()}`,
+  id,
   ...props
 }) => {
+  // Compute the id only once; if id isn't provided, auto-generate one.
+  const finalIdRef = useRef(id || `Modal-${idgen()}`);
+  const finalId = finalIdRef.current;
+
   const _modalRoot = useRef(null);
   const _modalInstance = useRef(null);
   const _modalRef = useRef(null);
@@ -78,13 +82,11 @@ const Modal = ({
 
   const showModal = e => {
     e && e.preventDefault();
-
     _modalInstance.current && _modalInstance.current.open();
   };
 
   const hideModal = e => {
     e && e.preventDefault();
-
     _modalInstance.current && _modalInstance.current.close();
   };
 
@@ -104,7 +106,7 @@ const Modal = ({
     }
 
     return createPortal(
-      <div className={classes} ref={_modalRef} {...props}>
+      <div className={classes} ref={_modalRef} id={finalId} {...props}>
         <div className="modal-content">
           <h4>{header}</h4>
           {children}
