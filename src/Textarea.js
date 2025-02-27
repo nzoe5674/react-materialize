@@ -22,7 +22,7 @@ const Textarea = ({
   validate,
   defaultValue,
   value,
-  id,
+  id = `Textarea-${idgen()}`,
   ...rest
 }) => {
   const textareaRef = useRef(null);
@@ -161,12 +161,6 @@ Textarea.propTypes = {
    * onChange callback
    */
   onChange: PropTypes.func
-};
-
-Textarea.defaultProps = {
-  get id() {
-    return `Textarea-${idgen()}`;
-  }
 };
 
 export default Textarea;

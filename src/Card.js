@@ -20,8 +20,8 @@ const Card = ({
   reveal,
   children,
   horizontal,
-  closeIcon,
-  revealIcon,
+  closeIcon = <Icon>close</Icon>,
+  revealIcon = <Icon>more_vert</Icon>,
   ...other
 }) => {
   const classes = {
@@ -67,19 +67,8 @@ Card.propTypes = {
   // The buttons to be displayed at the action area
   actions: PropTypes.arrayOf(PropTypes.element),
   horizontal: PropTypes.bool,
-  /**
-   * @default <Icon>close</Icon>
-   */
   closeIcon: PropTypes.node,
-  /**
-   * @default <Icon>more_vert</Icon>
-   */
   revealIcon: PropTypes.node
-};
-
-Card.defaultProps = {
-  closeIcon: <Icon>close</Icon>,
-  revealIcon: <Icon>more_vert</Icon>
 };
 
 export default Card;

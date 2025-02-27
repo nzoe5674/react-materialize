@@ -39,6 +39,7 @@ const TextInput = React.forwardRef((props, ref) => {
     defaultValue,
     value,
     type,
+    id = `TextInput-${idgen()}`,
     ...other
   } = props;
 
@@ -227,12 +228,6 @@ TextInput.propTypes = {
    * children
    */
   children: PropTypes.node
-};
-
-TextInput.defaultProps = {
-  get id() {
-    return `TextInput-${idgen()}`;
-  }
 };
 
 export default TextInput;

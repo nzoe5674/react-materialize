@@ -5,7 +5,7 @@ import cx from 'classnames';
 const Collapsible = ({
   children,
   className,
-  accordion,
+  accordion = true,
   options,
   defaultActiveKey,
   popout,
@@ -98,10 +98,6 @@ Collapsible.propTypes = {
    * Options passed to initializer
    */
   options: PropTypes.any
-};
-
-Collapsible.defaultProps = {
-  accordion: true
 };
 
 export default Collapsible;

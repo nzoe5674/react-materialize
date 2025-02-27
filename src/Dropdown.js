@@ -9,23 +9,48 @@ import PropTypes from 'prop-types';
 import idgen from './idgen';
 import cx from 'classnames';
 
-const Dropdown = ({ children, className, trigger, options, ...props }) => {
+const Dropdown = ({
+  children,
+  className,
+  trigger,
+  options = {},
+  id,
+  ...props
+}) => {
+  const finalId = id || `Dropdown_${idgen()}`;
+  const finalOptions = {
+    alignment: 'left',
+    autoTrigger: true,
+    constrainWidth: true,
+    container: null,
+    coverTrigger: true,
+    closeOnClick: true,
+    hover: false,
+    inDuration: 150,
+    outDuration: 250,
+    onOpenStart: null,
+    onOpenEnd: null,
+    onCloseStart: null,
+    onCloseEnd: null,
+    ...options
+  };
+
   const _dropdownContent = useRef(null);
 
   useEffect(() => {
     const instance = M.Dropdown.init(
-      document.querySelector(`[data-target="${props.id}"]`),
-      options
+      document.querySelector(`[data-target="${finalId}"]`),
+      finalOptions
     );
 
     return () => {
       instance && instance.destroy();
     };
-  }, [options, props.id, children]);
+  }, [finalOptions, finalId, children]);
 
   const renderTrigger = () =>
     cloneElement(trigger, {
-      'data-target': props.id,
+      'data-target': finalId,
       className: cx(trigger.props.className, 'dropdown-trigger')
     });
 
@@ -93,27 +118,6 @@ Dropdown.propTypes = {
    * <a target="_blank" href="http://materializecss.com/dropdown.html#options">http://materializecss.com/dropdown.html</a>
    */
   options: dropdownOptions
-};
-
-Dropdown.defaultProps = {
-  get id() {
-    return `Dropdown_${idgen()}`;
-  },
-  options: {
-    alignment: 'left',
-    autoTrigger: true,
-    constrainWidth: true,
-    container: null,
-    coverTrigger: true,
-    closeOnClick: true,
-    hover: false,
-    inDuration: 150,
-    outDuration: 250,
-    onOpenStart: null,
-    onOpenEnd: null,
-    onCloseStart: null,
-    onCloseEnd: null
-  }
 };
 
 export default Dropdown;

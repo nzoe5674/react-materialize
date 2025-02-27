@@ -7,11 +7,16 @@ import Row from './Row';
 import Tab from './Tab';
 
 const Tabs = ({
-  scope,
+  scope = `tabs-${idgen()}`,
   children,
   className,
   defaultValue,
-  options,
+  options = {
+    duration: 300,
+    onShow: null,
+    swipeable: false,
+    responsiveThreshold: Infinity
+  },
   onChange
 }) => {
   const _tabsRef = useRef(null);
@@ -91,7 +96,7 @@ Tabs.propTypes = {
      */
     duration: PropTypes.number,
     /**
-     * Callback for when a new tab content is showns.
+     * Callback for when a new tab content is shown.
      * @default null
      */
     onShow: PropTypes.func,
@@ -106,21 +111,6 @@ Tabs.propTypes = {
      */
     responsiveThreshold: PropTypes.number
   })
-};
-
-Tabs.defaultProps = {
-  get scope() {
-    return `tabs-${idgen()}`;
-  }
-};
-
-Tab.defaultProps = {
-  options: {
-    duration: 300,
-    onShow: null,
-    swipeable: false,
-    responsiveThreshold: Infinity
-  }
 };
 
 export default Tabs;

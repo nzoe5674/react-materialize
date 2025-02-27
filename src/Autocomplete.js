@@ -13,7 +13,13 @@ const Autocomplete = ({
   l,
   xl,
   id,
-  options,
+  options = {
+    data: {},
+    limit: Infinity,
+    onAutocomplete: null,
+    minLength: 1,
+    sortFunction: null
+  },
   ...rest
 }) => {
   const autocompleteRef = useRef(null);
@@ -39,10 +45,10 @@ const Autocomplete = ({
         className="autocomplete"
         type="text"
         ref={autocompleteRef}
-        id={id}
+        id={id || `Autocomplete-${idgen()}`}
         {...rest}
       />
-      <label htmlFor={id}>{title}</label>
+      <label htmlFor={id || `Autocomplete-${idgen()}`}>{title}</label>
     </div>
   );
 };
@@ -108,19 +114,6 @@ Autocomplete.propTypes = {
    * <a target="_blank" rel="external" href="https://materializecss.com/autocomplete.html#options</a>
    */
   options: autocompleteOptions
-};
-
-Autocomplete.defaultProps = {
-  get id() {
-    return `Autocomplete-${idgen()}`;
-  },
-  options: {
-    data: {},
-    limit: Infinity,
-    onAutocomplete: null,
-    minLength: 1,
-    sortFunction: null
-  }
 };
 
 export default Autocomplete;

@@ -3,7 +3,31 @@ import PropTypes from 'prop-types';
 import TextInput from './TextInput';
 import idgen from './idgen';
 
-const TimePicker = ({ onChange, options, ...props }) => {
+const TimePicker = ({
+  onChange,
+  options = {
+    duration: 350,
+    container: null,
+    showClearBtn: false,
+    defaultTime: 'now',
+    fromNow: 0,
+    i18n: {
+      cancel: 'Cancel',
+      clear: 'Clear',
+      done: 'Ok'
+    },
+    autoClose: false,
+    twelveHour: true,
+    vibrate: true,
+    onOpenStart: null,
+    onOpenEnd: null,
+    onCloseStart: null,
+    onCloseEnd: null,
+    onSelect: null
+  },
+  id = `TimePicker-${idgen()}`,
+  ...props
+}) => {
   const timeEl = useRef(null);
 
   useEffect(() => {
@@ -108,32 +132,6 @@ TimePicker.propTypes = {
      */
     onSelect: PropTypes.func
   })
-};
-
-TimePicker.defaultProps = {
-  get id() {
-    return `TimePicker-${idgen()}`;
-  },
-  options: {
-    duration: 350,
-    container: null,
-    showClearBtn: false,
-    defaultTime: 'now',
-    fromNow: 0,
-    i18n: {
-      cancel: 'Cancel',
-      clear: 'Clear',
-      done: 'Ok'
-    },
-    autoClose: false,
-    twelveHour: true,
-    vibrate: true,
-    onOpenStart: null,
-    onOpenEnd: null,
-    onCloseStart: null,
-    onCloseEnd: null,
-    onSelect: null
-  }
 };
 
 export default TimePicker;

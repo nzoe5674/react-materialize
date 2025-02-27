@@ -12,7 +12,7 @@ import constants from './constants';
 import { dropdownOptions } from './Dropdown';
 
 const Select = ({
-  id,
+  id = `Select-${idgen()}`,
   s,
   m,
   l,
@@ -26,8 +26,24 @@ const Select = ({
   error,
   validate,
   children,
-  multiple,
-  options,
+  multiple = false,
+  options = {
+    classes: '',
+    dropdownOptions: {
+      alignment: 'left',
+      autoTrigger: true,
+      constrainWidth: true,
+      coverTrigger: true,
+      closeOnClick: true,
+      hover: false,
+      inDuration: 150,
+      outDuration: 250,
+      onOpenStart: null,
+      onOpenEnd: null,
+      onCloseStart: null,
+      onCloseEnd: null
+    }
+  },
   value,
   onChange,
   ...props
@@ -195,30 +211,6 @@ Select.propTypes = {
      */
     dropdownOptions: dropdownOptions
   })
-};
-
-Select.defaultProps = {
-  get id() {
-    return `Select-${idgen()}`;
-  },
-  multiple: false,
-  options: {
-    classes: '',
-    dropdownOptions: {
-      alignment: 'left',
-      autoTrigger: true,
-      constrainWidth: true,
-      coverTrigger: true,
-      closeOnClick: true,
-      hover: false,
-      inDuration: 150,
-      outDuration: 250,
-      onOpenStart: null,
-      onOpenEnd: null,
-      onCloseStart: null,
-      onCloseEnd: null
-    }
-  }
 };
 
 export default Select;

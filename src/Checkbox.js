@@ -4,7 +4,7 @@ import cx from 'classnames';
 import idgen from './idgen';
 
 const Checkbox = ({
-  id,
+  id = `Checkbox_${idgen()}`,
   className,
   indeterminate,
   filledIn,
@@ -87,12 +87,6 @@ Checkbox.propTypes = {
    * A Boolean attribute indicating whether or not this checkbox is checked
    */
   checked: PropTypes.bool
-};
-
-Checkbox.defaultProps = {
-  get id() {
-    return `Checkbox_${idgen()}`;
-  }
 };
 
 export default Checkbox;

@@ -6,9 +6,9 @@ import cx from 'classnames';
 import idgen from './idgen';
 
 const Button = ({
+  node = 'button',
   children,
   className,
-  node,
   fab,
   modal,
   flat,
@@ -173,10 +173,6 @@ Button.propTypes = {
     'green',
     'teal'
   ])
-};
-
-Button.defaultProps = {
-  node: 'button'
 };
 
 export default Button;

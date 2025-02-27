@@ -14,16 +14,33 @@ import Button from './Button';
 import { safeJSONStringify } from './utils';
 
 const Modal = ({
-  actions,
-  bottomSheet,
+  actions = [
+    <Button waves="green" modal="close" flat>
+      Close
+    </Button>
+  ],
+  bottomSheet = false,
   children,
-  fixedFooter,
+  fixedFooter = false,
   header,
   className,
   trigger,
-  options,
-  open,
-  root,
+  options = {
+    opacity: 0.5,
+    inDuration: 250,
+    outDuration: 250,
+    onOpenStart: null,
+    onOpenEnd: null,
+    onCloseStart: null,
+    onCloseEnd: null,
+    preventScrolling: true,
+    dismissible: true,
+    startingTop: '4%',
+    endingTop: '10%'
+  },
+  open = false,
+  root = typeof window !== 'undefined' ? document.body : null,
+  id = `Modal-${idgen()}`,
   ...props
 }) => {
   const _modalRoot = useRef(null);
@@ -202,34 +219,6 @@ Modal.propTypes = {
    * @default document.body
    */
   root: PropTypes.any
-};
-
-Modal.defaultProps = {
-  get id() {
-    return `Modal-${idgen()}`;
-  },
-  root: typeof window !== 'undefined' ? document.body : null,
-  open: false,
-  options: {
-    opacity: 0.5,
-    inDuration: 250,
-    outDuration: 250,
-    onOpenStart: null,
-    onOpenEnd: null,
-    onCloseStart: null,
-    onCloseEnd: null,
-    preventScrolling: true,
-    dismissible: true,
-    startingTop: '4%',
-    endingTop: '10%'
-  },
-  fixedFooter: false,
-  bottomSheet: false,
-  actions: [
-    <Button waves="green" modal="close" flat>
-      Close
-    </Button>
-  ]
 };
 
 export default Modal;

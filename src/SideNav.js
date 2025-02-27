@@ -6,7 +6,7 @@ import idgen from './idgen';
 
 const SideNav = ({
   options,
-  id,
+  id = `SideNav-${idgen()}`,
   className,
   children,
   trigger,
@@ -88,12 +88,6 @@ SideNav.propTypes = {
    */
   className: PropTypes.string,
   children: PropTypes.node
-};
-
-SideNav.defaultProps = {
-  get id() {
-    return `SideNav-${idgen()}`;
-  }
 };
 
 export default SideNav;

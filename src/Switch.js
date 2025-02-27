@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import idgen from './idgen';
 
-const Switch = ({ id, offLabel, onLabel, ...props }) => (
+const Switch = ({
+  id = `Switch-${idgen()}`,
+  offLabel,
+  onLabel,
+  onChange = () => {},
+  ...props
+}) => (
   <div className="switch">
     <label htmlFor={id}>
       {offLabel}
@@ -40,13 +46,6 @@ Switch.propTypes = {
    * initialise checkbox checked
    */
   checked: PropTypes.bool
-};
-
-Switch.defaultProps = {
-  get id() {
-    return `Switch-${idgen()}`;
-  },
-  onChange: () => {}
 };
 
 export default Switch;
